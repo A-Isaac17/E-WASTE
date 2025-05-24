@@ -1,24 +1,28 @@
 import { NavLink } from "react-router-dom";
 import { FaHome, FaList } from "react-icons/fa";
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, title }) => {
   return (
-    <div className="w-64 bg-blue-800 text-white flex flex-col">
-      <div className="p-4 text-2xl font-bold">E-Waste Admin</div>
-      <nav className="flex-1">
+    <div className={`sidebar bg-dark text-white ${isOpen ? "w-25" : "w-15"}`}>
+      <div className="p-4 fs-4 fw-bold text-center">{isOpen ? title : "EWA"}</div>
+      <nav className="nav flex-column">
         <NavLink
           to="/"
-          className="flex items-center p-4 hover:bg-blue-700"
-          activeClassName="bg-blue-900"
+          className={({ isActive }) =>
+            `nav-link text-white d-flex align-items-center p-3 ${isActive ? "active" : ""}`
+          }
         >
-          <FaHome className="mr-2" /> Dashboard
+          <FaHome className="me-2" />
+          <span>Dashboard</span>
         </NavLink>
         <NavLink
           to="/requests"
-          className="flex items-center p-4 hover:bg-blue-700"
-          activeClassName="bg-blue-900"
+          className={({ isActive }) =>
+            `nav-link text-white d-flex align-items-center p-3 ${isActive ? "active" : ""}`
+          }
         >
-          <FaList className="mr-2" /> Collection Requests
+          <FaList className="me-2" />
+          <span>Collection Requests</span>
         </NavLink>
       </nav>
     </div>
