@@ -1,0 +1,5 @@
+Django>=3.2,<4.0  # Or your preferred Django version
+djangorestframework>=3.12,<3.15
+mysqlclient>=2.0,<2.2
+django-cors-headers>=3.7,<4.0
+# Add other packages like gunicorn for deployment, python-dotenv, etc.
