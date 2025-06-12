@@ -2,8 +2,30 @@
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+from django.core.management.utils import get_random_secret_key
 
+load_dotenv()
+ROOT_URLCONF = 'Collection_Requests.urls'
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from .env file
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
+    }
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -74,3 +96,8 @@ DATABASES = {
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_secret_key())
+
